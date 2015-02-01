@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <script src="jquery-2.1.1.js"></script>
 <script src="envision.js"></script>
-<script src="flotr2/candles.js"></script>
 <title>StockHoloscope</title>
 <style>
 #graph {
@@ -70,8 +69,8 @@ function View () {
 	    selection : {
 	      data : {
 	        x : {
-	          min : 100,
-	          max : 200
+	          min : Math.max(0, meigara.hiashi.length-101),
+	          max : meigara.hiashi.length-1
 	        }
 	      }
 	    }

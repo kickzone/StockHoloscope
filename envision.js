@@ -1359,20 +1359,20 @@ Flotr = {
   bean: bean,
   isIphone: /iphone/i.test(navigator.userAgent),
   isIE: (navigator.appVersion.indexOf("MSIE") != -1 ? parseFloat(navigator.appVersion.split("MSIE")[1]) : false),
-  
+
   /**
    * An object of the registered graph types. Use Flotr.addType(type, object)
    * to add your own type.
    */
   graphTypes: {},
-  
+
   /**
    * The list of the registered plugins
    */
   plugins: {},
-  
+
   /**
-   * Can be used to add your own chart type. 
+   * Can be used to add your own chart type.
    * @param {String} name - Type of chart, like 'pies', 'bars' etc.
    * @param {String} graphType - The object containing the basic drawing functions (draw, etc)
    */
@@ -1381,7 +1381,7 @@ Flotr = {
     Flotr.defaultOptions[name] = graphType.options || {};
     Flotr.defaultOptions.defaultType = Flotr.defaultOptions.defaultType || name;
   },
-  
+
   /**
    * Can be used to add a plugin
    * @param {String} name - The name of the plugin
@@ -1391,7 +1391,7 @@ Flotr = {
     Flotr.plugins[name] = plugin;
     Flotr.defaultOptions[name] = plugin.options || {};
   },
-  
+
   /**
    * Draws the graph. This function is here for backwards compatibility with Flotr version 0.1.0alpha.
    * You could also draw graphs by directly calling Flotr.Graph(element, data, options).
@@ -1401,11 +1401,11 @@ Flotr = {
    * @param {Class} _GraphKlass_ - (optional) Class to pass the arguments to, defaults to Flotr.Graph
    * @return {Object} returns a new graph object and of course draws the graph.
    */
-  draw: function(el, data, options, GraphKlass){  
+  draw: function(el, data, options, GraphKlass){
     GraphKlass = GraphKlass || Flotr.Graph;
     return new GraphKlass(el, data, options);
   },
-  
+
   /**
    * Recursively merges two objects.
    * @param {Object} src - source object (likely the object with the least properties)
@@ -1433,7 +1433,7 @@ Flotr = {
 
     return result;
   },
-  
+
   /**
    * Recursively clones an object.
    * @param {Object} object - The object to clone
@@ -1443,7 +1443,7 @@ Flotr = {
   clone: function(object){
     return Flotr.merge(object, {});
   },
-  
+
   /**
    * Function calculates the ticksize and returns it.
    * @param {Integer} noTicks - number of ticks
@@ -1457,15 +1457,15 @@ Flotr = {
         magn = Flotr.getMagnitude(delta),
         tickSize = 10,
         norm = delta / magn; // Norm is between 1.0 and 10.0.
-        
+
     if(norm < 1.5) tickSize = 1;
     else if(norm < 2.25) tickSize = 2;
     else if(norm < 3) tickSize = ((decimals === 0) ? 2 : 2.5);
     else if(norm < 7.5) tickSize = 5;
-    
+
     return tickSize * magn;
   },
-  
+
   /**
    * Default tick formatter.
    * @param {String, Integer} val - tick value integer
@@ -1475,7 +1475,7 @@ Flotr = {
   defaultTickFormatter: function(val, axisOpts){
     return val+'';
   },
-  
+
   /**
    * Formats the mouse tracker values.
    * @param {Object} obj - Track value Object {x:..,y:..}
@@ -1483,8 +1483,8 @@ Flotr = {
    */
   defaultTrackFormatter: function(obj){
     return '('+obj.x+', '+obj.y+')';
-  }, 
-  
+  },
+
   /**
    * Utility function to convert file size values in bytes to kB, MB, ...
    * @param value {Number} - The value to convert
@@ -1512,7 +1512,7 @@ Flotr = {
 
     return (Math.round(value * precision) / precision) + sizes[total];
   },
-  
+
   /**
    * Returns the magnitude of the input value.
    * @param {Integer, Float} x - integer or float value
@@ -1535,7 +1535,7 @@ Flotr = {
       ctx.drawText(text, x, y, style);
       return;
     }
-    
+
     style = this._.extend({
       size: Flotr.defaultOptions.fontSize,
       color: '#000000',
@@ -1544,7 +1544,7 @@ Flotr = {
       weight: 1,
       angle: 0
     }, style);
-    
+
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(style.angle);
@@ -1558,13 +1558,13 @@ Flotr = {
   getBestTextAlign: function(angle, style) {
     style = style || {textAlign: 'center', textBaseline: 'middle'};
     angle += Flotr.getTextAngleFromAlign(style);
-    
-    if (Math.abs(Math.cos(angle)) > 10e-3) 
+
+    if (Math.abs(Math.cos(angle)) > 10e-3)
       style.textAlign    = (Math.cos(angle) > 0 ? 'right' : 'left');
-    
-    if (Math.abs(Math.sin(angle)) > 10e-3) 
+
+    if (Math.abs(Math.sin(angle)) > 10e-3)
       style.textBaseline = (Math.sin(angle) > 0 ? 'top' : 'bottom');
-    
+
     return style;
   },
   alignTable: {
@@ -1663,7 +1663,7 @@ Flotr.defaultOptions = {
     color: '#545454',      // => primary color used for outline and labels
     backgroundColor: null, // => null for transparent, else color
     backgroundImage: null, // => background image. String or object with src, left and top
-    watermarkAlpha: 0.4,   // => 
+    watermarkAlpha: 0.4,   // =>
     tickColor: '#DDDDDD',  // => color used for the ticks
     labelMargin: 3,        // => margin in pixels
     verticalLines: true,   // => whether to show gridlines in vertical direction
@@ -1687,7 +1687,7 @@ Flotr.defaultOptions = {
     trackY: true,          // => whether or not to track the mouse in the y axis
     radius: 3,             // => radius of the track point
     fillColor: null,       // => color to fill our select bar with only applies to bar and similar graphs (only bars for now)
-    fillOpacity: 0.4       // => opacity of the fill color, set to 1 for a solid fill, 0 hides the fill 
+    fillOpacity: 0.4       // => opacity of the fill color, set to 1 for a solid fill, 0 hides the fill
   }
 };
 
@@ -1789,19 +1789,19 @@ _.extend(Color, {
     // rgb(num,num,num)
     if((result = /rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(color)))
       return new Color(parseInt(result[1], 10), parseInt(result[2], 10), parseInt(result[3], 10));
-  
+
     // #fff
     if((result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color)))
       return new Color(parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16));
-  
+
     // rgba(num,num,num,num)
     if((result = /rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(color)))
       return new Color(parseInt(result[1], 10), parseInt(result[2], 10), parseInt(result[3], 10), parseFloat(result[4]));
-      
+
     // rgb(num%,num%,num%)
     if((result = /rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(color)))
       return new Color(parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55);
-  
+
     // rgba(num%,num%,num%,num)
     if((result = /rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(color)))
       return new Color(parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55, parseFloat(result[4]));
@@ -1823,15 +1823,15 @@ _.extend(Color, {
     if (!color) return 'rgba(0, 0, 0, 0)';
     if (color instanceof Color) return color.alpha(opacity).toString();
     if (_.isString(color)) return Color.parse(color).alpha(opacity).toString();
-    
+
     var grad = color.colors ? color : {colors: color};
-    
+
     if (!options.ctx) {
       if (!_.isArray(grad.colors)) return 'rgba(0, 0, 0, 0)';
       return Color.parse(_.isArray(grad.colors[0]) ? grad.colors[0][1] : grad.colors[0]).alpha(opacity).toString();
     }
-    grad = _.extend({start: 'top', end: 'bottom'}, grad); 
-    
+    grad = _.extend({start: 'top', end: 'bottom'}, grad);
+
     if (/top/i.test(grad.start))  options.x1 = 0;
     if (/left/i.test(grad.start)) options.y1 = 0;
     if (/bottom/i.test(grad.end)) options.x2 = 0;
@@ -1875,7 +1875,7 @@ Flotr.Date = {
   format: function(d, format, mode) {
     if (!d) return;
 
-    // We should maybe use an "official" date format spec, like PHP date() or ColdFusion 
+    // We should maybe use an "official" date format spec, like PHP date() or ColdFusion
     // http://fr.php.net/manual/en/function.date.php
     // http://livedocs.adobe.com/coldfusion/8/htmldocs/help.html?content=functions_c-d_29.html
     var
@@ -1896,13 +1896,13 @@ Flotr.Date = {
       n += '';
       return n.length == 1 ? "0" + n : n;
     }
-    
+
     var r = [], c,
         escape = false;
-    
+
     for (var i = 0; i < format.length; ++i) {
       c = format.charAt(i);
-      
+
       if (escape) {
         r.push(tokens[c] || c);
         escape = false;
@@ -1932,7 +1932,7 @@ Flotr.Date = {
     // first check global format
     if (axis.options.timeFormat)
       return Flotr.Date.format(d, options.timeFormat, options.timeMode);
-    
+
     var span = (axis.max - axis.min) * scale,
         t = axis.tickSize * Flotr.Date.timeUnits[axis.tickUnit];
 
@@ -2000,7 +2000,7 @@ Flotr.Date = {
       case "month": setTick('Month'); break;
       case "year": setTick('FullYear'); break;
     }
-    
+
     // reset smaller components
     if (step >= timeUnits.second)  set(d, 'Milliseconds', mode, 0);
     if (step >= timeUnits.minute)  set(d, 'Seconds', mode, 0);
@@ -2050,9 +2050,9 @@ Flotr.Date = {
   },
   // the allowed tick sizes, after 1 year we use an integer algorithm
   spec: [
-    [1, "millisecond"], [20, "millisecond"], [50, "millisecond"], [100, "millisecond"], [200, "millisecond"], [500, "millisecond"], 
-    [1, "second"],   [2, "second"],  [5, "second"], [10, "second"], [30, "second"], 
-    [1, "minute"],   [2, "minute"],  [5, "minute"], [10, "minute"], [30, "minute"], 
+    [1, "millisecond"], [20, "millisecond"], [50, "millisecond"], [100, "millisecond"], [200, "millisecond"], [500, "millisecond"],
+    [1, "second"],   [2, "second"],  [5, "second"], [10, "second"], [30, "second"],
+    [1, "minute"],   [2, "minute"],  [5, "minute"], [10, "minute"], [30, "minute"],
     [1, "hour"],     [2, "hour"],    [4, "hour"],   [8, "hour"],    [12, "hour"],
     [1, "day"],      [2, "day"],     [3, "day"],
     [0.25, "month"], [0.5, "month"], [1, "month"],  [2, "month"],   [3, "month"], [6, "month"],
@@ -3021,7 +3021,7 @@ Axis.prototype = {
 
     this.ticks = [];
     this.minorTicks = [];
-    
+
     // User Ticks
     if(options.ticks){
       this._cleanUserTicks(options.ticks, this.ticks);
@@ -3054,7 +3054,7 @@ Axis.prototype = {
       min     = o.min !== null ? o.min : axis.datamin,
       max     = o.max !== null ? o.max : axis.datamax,
       margin  = o.autoscaleMargin;
-        
+
     if (o.scaling == 'logarithmic') {
       if (min <= 0) min = axis.datamin;
 
@@ -3078,9 +3078,9 @@ Axis.prototype = {
       var minexp = Math.log(min);
       if (o.base != Math.E) minexp /= Math.log(o.base);
       minexp = Math.ceil(minexp);
-      
+
       axis.tickSize = Flotr.getTickSize(o.noTicks, minexp, maxexp, o.tickDecimals === null ? 0 : o.tickDecimals);
-                        
+
       // Try to determine a suitable amount of miniticks based on the length of a decade
       if (o.minorTickFreq === null) {
         if (maxexp - minexp > 10)
@@ -3104,10 +3104,10 @@ Axis.prototype = {
       if(axis.min < 0 && axis.datamin >= 0) axis.min = 0;
       axis.min = axis.tickSize * Math.floor(axis.min / axis.tickSize);
     }
-    
+
     if(o.max === null && o.autoscale){
       axis.max += axis.tickSize * margin;
-      if(axis.max > 0 && axis.datamax <= 0 && axis.datamax != axis.datamin) axis.max = 0;        
+      if(axis.max > 0 && axis.datamax <= 0 && axis.datamax != axis.datamin) axis.max = 0;
       axis.max = axis.tickSize * Math.ceil(axis.max / axis.tickSize);
     }
 
@@ -3137,7 +3137,7 @@ Axis.prototype = {
     );
 
     this.titleSize = T.dimensions(
-      this.options.title, 
+      this.options.title,
       {size:options.fontSize*1.2, angle: Flotr.toRad(this.options.titleAngle)},
       'font-weight:bold;',
       'flotr-axis-title'
@@ -3182,18 +3182,18 @@ Axis.prototype = {
     var min = Math.log(axis.min);
     if (o.base != Math.E) min /= Math.log(o.base);
     min = Math.ceil(min);
-    
+
     for (i = min; i < max; i += axis.tickSize) {
       decadeStart = (o.base == Math.E) ? Math.exp(i) : Math.pow(o.base, i);
       // Next decade begins here:
       var decadeEnd = decadeStart * ((o.base == Math.E) ? Math.exp(axis.tickSize) : Math.pow(o.base, axis.tickSize));
       var stepSize = (decadeEnd - decadeStart) / o.minorTickFreq;
-      
+
       axis.ticks.push({v: decadeStart, label: o.tickFormatter(decadeStart, {min : axis.min, max : axis.max})});
       for (v = decadeStart + stepSize; v < decadeEnd; v += stepSize)
         axis.minorTicks.push({v: v, label: o.tickFormatter(v, {min : axis.min, max : axis.max})});
     }
-    
+
     // Always show the value at the would-be start of next decade (end of this decade)
     decadeStart = (o.base == Math.E) ? Math.exp(i) : Math.pow(o.base, i);
     axis.ticks.push({v: decadeStart, label: o.tickFormatter(decadeStart, {min : axis.min, max : axis.max})});
@@ -3211,18 +3211,18 @@ Axis.prototype = {
         minorTickSize,
         v, v2,
         i, j;
-    
+
     if (o.minorTickFreq)
       minorTickSize = tickSize / o.minorTickFreq;
-                      
+
     // Then store all possible ticks.
     for (i = 0; (v = v2 = start + i * tickSize) <= max; ++i){
-      
+
       // Round (this is always needed to fix numerical instability).
       decimals = o.tickDecimals;
       if (decimals === null) decimals = 1 - Math.floor(Math.log(tickSize) / Math.LN10);
       if (decimals < 0) decimals = 0;
-      
+
       v = v.toFixed(decimals);
       axis.ticks.push({ v: v, label: o.tickFormatter(v, {min : axis.min, max : axis.max}) });
 
@@ -3256,7 +3256,7 @@ _.extend(Axis, {
 
 function log (value, base) {
   value = Math.log(Math.max(value, Number.MIN_VALUE));
-  if (base !== Math.E) 
+  if (base !== Math.E)
     value /= Math.log(base);
   return value;
 }
@@ -3325,7 +3325,7 @@ Series.prototype = {
 
 _.extend(Series, {
   /**
-   * Collects dataseries from input and parses the series into the right format. It returns an Array 
+   * Collects dataseries from input and parses the series into the right format. It returns an Array
    * of Objects each having at least the 'data' key set.
    * @param {Array, Object} data - Object or array of dataseries
    * @return {Array} Array of Objects parsed into the right format ({(...,) data: [[x1,y1], [x2,y2], ...] (, ...)})
@@ -3367,9 +3367,9 @@ Text.prototype = {
   dimensions : function (text, canvasStyle, htmlStyle, className) {
 
     if (!text) return { width : 0, height : 0 };
-    
+
     return (this.o.html) ?
-      this.html(text, this.o.element, htmlStyle, className) : 
+      this.html(text, this.o.element, htmlStyle, className) :
       this.canvas(text, canvasStyle);
   },
 
@@ -3473,7 +3473,7 @@ Flotr.addType('lines', {
 
       context.lineWidth = shadowSize / 2;
       offset = lineWidth / 2 + context.lineWidth / 2;
-      
+
       // @TODO do this instead with a linear gradient
       context.strokeStyle = "rgba(0,0,0,0.1)";
       this.plot(options, offset + shadowSize / 2, false);
@@ -3494,11 +3494,11 @@ Flotr.addType('lines', {
 
     var
       context   = options.context,
-      width     = options.width, 
+      width     = options.width,
       height    = options.height,
       xScale    = options.xScale,
       yScale    = options.yScale,
-      data      = options.data, 
+      data      = options.data,
       stack     = options.stacked ? this.stack : false,
       length    = data.length - 1,
       prevx     = null,
@@ -3506,7 +3506,7 @@ Flotr.addType('lines', {
       zero      = yScale(0),
       start     = null,
       x1, x2, y1, y2, stack1, stack2, i;
-      
+
     if (length < 1) return;
 
     context.beginPath();
@@ -3531,12 +3531,12 @@ Flotr.addType('lines', {
       // TODO handle zero for logarithmic
       // if (xa.options.scaling === 'logarithmic' && (data[i][0] <= 0 || data[i+1][0] <= 0)) continue;
       // if (ya.options.scaling === 'logarithmic' && (data[i][1] <= 0 || data[i+1][1] <= 0)) continue;
-      
+
       x1 = xScale(data[i][0]);
       x2 = xScale(data[i+1][0]);
 
       if (start === null) start = data[i];
-      
+
       if (stack) {
 
         stack1 = stack.values[data[i][0]] || 0;
@@ -3544,10 +3544,10 @@ Flotr.addType('lines', {
 
         y1 = yScale(data[i][1] + stack1);
         y2 = yScale(data[i+1][1] + stack2);
-        
+
         if(incStack){
           stack.values[data[i][0]] = data[i][1]+stack1;
-            
+
           if(i == length-1)
             stack.values[data[i+1][0]] = data[i+1][1]+stack2;
         }
@@ -3566,7 +3566,7 @@ Flotr.addType('lines', {
 
       if((prevx != x1) || (prevy != y1 + shadowOffset))
         context.moveTo(x1, y1 + shadowOffset);
-      
+
       prevx = x2;
       prevy = y2 + shadowOffset;
       if (options.steps) {
@@ -3576,7 +3576,7 @@ Flotr.addType('lines', {
         context.lineTo(prevx, prevy);
       }
     }
-    
+
     if (!options.fill || options.fill && !options.fillBorder) context.stroke();
 
     fill();
@@ -3748,7 +3748,7 @@ Flotr.addType('bars', {
     grouped: false         // => groups bars together which share x value, hit not supported.
   },
 
-  stack : { 
+  stack : {
     positive : [],
     negative : [],
     _positive : [], // Shadow
@@ -3767,7 +3767,7 @@ Flotr.addType('bars', {
     context.lineWidth = options.lineWidth;
     context.strokeStyle = options.color;
     if (options.fill) context.fillStyle = options.fillStyle;
-    
+
     this.plot(options);
 
     context.restore();
@@ -3972,7 +3972,7 @@ Flotr.addType('bars', {
     var
       max = axis.options.max;
 
-    if (_.isNumber(max) || _.isString(max)) return; 
+    if (_.isNumber(max) || _.isString(max)) return;
 
     var
       newmin = axis.min,
@@ -3991,7 +3991,7 @@ Flotr.addType('bars', {
       }
     }
 
-    if (options.stacked && 
+    if (options.stacked &&
         ((orientation == 1 && horizontal) || (orientation == -1 && !horizontal))){
 
       for (j = data.length; j--;) {
@@ -4052,7 +4052,7 @@ Flotr.addType('points', {
 
     if (shadowSize > 0) {
       context.lineWidth = shadowSize / 2;
-      
+
       context.strokeStyle = 'rgba(0,0,0,0.1)';
       this.plot(options, shadowSize / 2 + context.lineWidth / 2);
 
@@ -4075,7 +4075,7 @@ Flotr.addType('points', {
       xScale  = options.xScale,
       yScale  = options.yScale,
       i, x, y;
-      
+
     for (i = data.length - 1; i > -1; --i) {
       y = data[i][1];
       if (y === null) continue;
@@ -4084,7 +4084,7 @@ Flotr.addType('points', {
       y = yScale(y);
 
       if (x < 0 || x > options.width || y < 0 || y > options.height) continue;
-      
+
       context.beginPath();
       if (offset) {
         context.arc(x, y + offset, options.radius, 0, Math.PI, false);
@@ -4098,7 +4098,7 @@ Flotr.addType('points', {
   }
 });
 
-/** 
+/**
  * Selection Handles Plugin
  *
  *
@@ -4240,14 +4240,14 @@ Flotr.addPlugin('selection', {
       selX = options.selection.mode.indexOf('x') != -1,
       selY = options.selection.mode.indexOf('y') != -1,
       s = this.selection.selection;
-    
+
     this.selection.clearSelection();
 
     s.first.y  = boundY((selX && !selY) ? 0 : (ya.max - area.y1) * vertScale, this);
     s.second.y = boundY((selX && !selY) ? this.plotHeight - 1: (ya.max - area.y2) * vertScale, this);
     s.first.x  = boundX((selY && !selX) ? 0 : (area.x1 - xa.min) * hozScale, this);
     s.second.x = boundX((selY && !selX) ? this.plotWidth : (area.x2 - xa.min) * hozScale, this);
-    
+
     this.selection.drawSelection();
     if (!preventEvent)
       this.selection.fireSelectEvent();
@@ -4263,7 +4263,7 @@ Flotr.addPlugin('selection', {
         selection = this.selection.selection;
 
     if(mode.indexOf('x') == -1) {
-      pos.x = (pos == selection.first) ? 0 : this.plotWidth;         
+      pos.x = (pos == selection.first) ? 0 : this.plotWidth;
     }else{
       pos.x = boundX(pointer.relX, this);
     }
@@ -4286,10 +4286,10 @@ Flotr.addPlugin('selection', {
       options = this.options,
       plotOffset = this.plotOffset,
       prevSelection = this.selection.prevSelection;
-    
+
     if (prevSelection &&
       s.first.x == prevSelection.first.x &&
-      s.first.y == prevSelection.first.y && 
+      s.first.y == prevSelection.first.y &&
       s.second.x == prevSelection.second.x &&
       s.second.y == prevSelection.second.y) {
       return;
@@ -4335,7 +4335,7 @@ Flotr.addPlugin('selection', {
     }
 
     this.selection.clearSelection();
-    
+
     if(this.selection.selectionIsSane()) {
       this.selection.drawSelection();
     }
@@ -4346,7 +4346,7 @@ Flotr.addPlugin('selection', {
    */
   clearSelection: function() {
     if (!this.selection.prevSelection) return;
-      
+
     var prevSelection = this.selection.prevSelection,
       lw = 1,
       plotOffset = this.plotOffset,
@@ -4354,12 +4354,12 @@ Flotr.addPlugin('selection', {
       y = Math.min(prevSelection.first.y, prevSelection.second.y),
       w = Math.abs(prevSelection.second.x - prevSelection.first.x),
       h = Math.abs(prevSelection.second.y - prevSelection.first.y);
-    
+
     this.octx.clearRect(x + plotOffset.left - lw + 0.5,
                         y + plotOffset.top - lw,
                         w + 2 * lw + 0.5,
                         h + 2 * lw + 0.5);
-    
+
     this.selection.prevSelection = null;
   },
   /**
@@ -4368,7 +4368,7 @@ Flotr.addPlugin('selection', {
    */
   selectionIsSane: function(){
     var s = this.selection.selection;
-    return Math.abs(s.second.x - s.first.x) >= 5 || 
+    return Math.abs(s.second.x - s.first.x) >= 5 ||
            Math.abs(s.second.y - s.first.y) >= 5;
   }
 
@@ -4415,10 +4415,10 @@ Flotr.addPlugin('legend', {
       options       = this.options,
       legend        = options.legend,
       fragments     = [],
-      rowStarted    = false, 
+      rowStarted    = false,
       ctx           = this.ctx,
       itemCount     = _.filter(series, function(s) {return (s.label && !s.hide);}).length,
-      p             = legend.position, 
+      p             = legend.position,
       m             = legend.margin,
       opacity       = legend.backgroundOpacity,
       i, label, color;
@@ -4452,11 +4452,11 @@ Flotr.addPlugin('legend', {
       }
 
       if (!options.HtmlText && this.textEnabled && !legend.container) {
-        
+
         if(p.charAt(0) == 's') offsetY = plotOffset.top + this.plotHeight - (m + legendHeight);
         if(p.charAt(0) == 'c') offsetY = plotOffset.top + (this.plotHeight/2) - (m + (legendHeight/2));
         if(p.charAt(1) == 'e') offsetX = plotOffset.left + this.plotWidth - (m + legendWidth);
-        
+
         // Legend box
         color = this.processColor(legend.backgroundColor, { opacity : opacity });
 
@@ -4464,31 +4464,31 @@ Flotr.addPlugin('legend', {
         ctx.fillRect(offsetX, offsetY, legendWidth, legendHeight);
         ctx.strokeStyle = legend.labelBoxBorderColor;
         ctx.strokeRect(Flotr.toPixel(offsetX), Flotr.toPixel(offsetY), legendWidth, legendHeight);
-        
+
         // Legend labels
         var x = offsetX + lbm;
         var y = offsetY + lbm;
         for(i = 0; i < series.length; i++){
           if(!series[i].label || series[i].hide) continue;
           label = legend.labelFormatter(series[i].label);
-          
+
           ctx.fillStyle = series[i].color;
           ctx.fillRect(x, y, lbw-1, lbh-1);
-          
+
           ctx.strokeStyle = legend.labelBoxBorderColor;
           ctx.lineWidth = 1;
           ctx.strokeRect(Math.ceil(x)-1.5, Math.ceil(y)-1.5, lbw+2, lbh+2);
-          
+
           // Legend text
           Flotr.drawText(ctx, label, x + lbw + lbm, y + lbh, style);
-          
+
           y += lbh + lbm;
         }
       }
       else {
         for(i = 0; i < series.length; ++i){
           if(!series[i].label || series[i].hide) continue;
-          
+
           if(i % legend.noColumns === 0){
             fragments.push(rowStarted ? '</tr><tr>' : '<tr>');
             rowStarted = true;
@@ -4500,7 +4500,7 @@ Flotr.addPlugin('legend', {
 
           label = legend.labelFormatter(s.label);
           color = 'background-color:' + ((s.bars && s.bars.show && s.bars.fillColor && s.bars.fill) ? s.bars.fillColor : s.color) + ';';
-          
+
           fragments.push(
             '<td class="flotr-legend-color-box">',
               '<div style="border:1px solid ', legend.labelBoxBorderColor, ';padding:1px">',
@@ -4513,7 +4513,7 @@ Flotr.addPlugin('legend', {
           );
         }
         if(rowStarted) fragments.push('</tr>');
-          
+
         if(fragments.length > 0){
           var table = '<table style="font-size:smaller;color:' + options.grid.color + '">' + fragments.join('') + '</table>';
           if(legend.container){
@@ -4534,7 +4534,7 @@ Flotr.addPlugin('legend', {
             D.setStyles(div, styles);
             D.insert(div, table);
             D.insert(this.el, div);
-            
+
             if (!opacity) return;
 
             var c = legend.backgroundColor || options.grid.backgroundColor || '#ffffff';
@@ -4836,9 +4836,9 @@ Flotr.addPlugin('hit', {
   drawMouseTrack : function (n) {
 
     var
-      pos         = '', 
+      pos         = '',
       s           = n.series,
-      p           = n.mouse.position, 
+      p           = n.mouse.position,
       m           = n.mouse.margin,
       x           = n.x,
       y           = n.y,
@@ -4874,12 +4874,12 @@ Flotr.addPlugin('hit', {
         },
         radius = (Math.min(this.canvasWidth, this.canvasHeight) * s.pie.sizeRatio) / 2,
         bisection = n.sAngle<n.eAngle ? (n.sAngle + n.eAngle) / 2: (n.sAngle + n.eAngle + 2* Math.PI) / 2;
-      
+
       pos += 'bottom:' + (m - top - center.y - Math.sin(bisection) * radius/2 + this.canvasHeight) + 'px;top:auto;';
       pos += 'left:' + (m + left + center.x + Math.cos(bisection) * radius/2) + 'px;right:auto;';
 
     // Default
-    } else {    
+    } else {
       if (/n/.test(p)) pos += 'bottom:' + (m - top - n.yaxis.d2p(n.y) + this.canvasHeight) + 'px;top:auto;';
       else             pos += 'top:' + (m + top + n.yaxis.d2p(n.y)) + 'px;bottom:auto;';
       if (/w/.test(p)) pos += 'right:' + (m - left - n.xaxis.d2p(n.x) + this.canvasWidth) + 'px;left:auto;';
@@ -4889,15 +4889,15 @@ Flotr.addPlugin('hit', {
     elStyle += pos;
     mouseTrack.style.cssText = elStyle;
     if (!decimals || decimals < 0) decimals = 0;
-    
+
     if (x && x.toFixed) x = x.toFixed(decimals);
 
     if (y && y.toFixed) y = y.toFixed(decimals);
 
     mouseTrack.innerHTML = n.mouse.trackFormatter({
       x: x ,
-      y: y, 
-      series: n.series, 
+      y: y,
+      series: n.series,
       index: n.index,
       nearest: n,
       fraction: n.fraction
@@ -4973,7 +4973,7 @@ Flotr.addPlugin('labels', {
       drawLabelNoHtmlText(this, a.x2, 'center', 'bottom');
       drawLabelNoHtmlText(this, a.y, 'right', 'middle');
       drawLabelNoHtmlText(this, a.y2, 'left', 'middle');
-    
+
     } else if ((
         a.x.options.showLabels ||
         a.x2.options.showLabels ||
@@ -5137,7 +5137,7 @@ Flotr.addPlugin('labels', {
             axis.options.color ? ('color:' + axis.options.color + '; ') : ' ',
             '" class="flotr-grid-label' + name + '">' + tick.label + '</div>'
           ].join(' ');
-          
+
           if (!isX && !isFirst) {
             ctx.moveTo(offset.left + graph.plotWidth - 8, offset.top + axis.d2p(tick.v));
             ctx.lineTo(offset.left + graph.plotWidth, offset.top + axis.d2p(tick.v));
@@ -5189,10 +5189,10 @@ Flotr.addPlugin('legend', {
       options       = this.options,
       legend        = options.legend,
       fragments     = [],
-      rowStarted    = false, 
+      rowStarted    = false,
       ctx           = this.ctx,
       itemCount     = _.filter(series, function(s) {return (s.label && !s.hide);}).length,
-      p             = legend.position, 
+      p             = legend.position,
       m             = legend.margin,
       opacity       = legend.backgroundOpacity,
       i, label, color;
@@ -5226,11 +5226,11 @@ Flotr.addPlugin('legend', {
       }
 
       if (!options.HtmlText && this.textEnabled && !legend.container) {
-        
+
         if(p.charAt(0) == 's') offsetY = plotOffset.top + this.plotHeight - (m + legendHeight);
         if(p.charAt(0) == 'c') offsetY = plotOffset.top + (this.plotHeight/2) - (m + (legendHeight/2));
         if(p.charAt(1) == 'e') offsetX = plotOffset.left + this.plotWidth - (m + legendWidth);
-        
+
         // Legend box
         color = this.processColor(legend.backgroundColor, { opacity : opacity });
 
@@ -5238,31 +5238,31 @@ Flotr.addPlugin('legend', {
         ctx.fillRect(offsetX, offsetY, legendWidth, legendHeight);
         ctx.strokeStyle = legend.labelBoxBorderColor;
         ctx.strokeRect(Flotr.toPixel(offsetX), Flotr.toPixel(offsetY), legendWidth, legendHeight);
-        
+
         // Legend labels
         var x = offsetX + lbm;
         var y = offsetY + lbm;
         for(i = 0; i < series.length; i++){
           if(!series[i].label || series[i].hide) continue;
           label = legend.labelFormatter(series[i].label);
-          
+
           ctx.fillStyle = series[i].color;
           ctx.fillRect(x, y, lbw-1, lbh-1);
-          
+
           ctx.strokeStyle = legend.labelBoxBorderColor;
           ctx.lineWidth = 1;
           ctx.strokeRect(Math.ceil(x)-1.5, Math.ceil(y)-1.5, lbw+2, lbh+2);
-          
+
           // Legend text
           Flotr.drawText(ctx, label, x + lbw + lbm, y + lbh, style);
-          
+
           y += lbh + lbm;
         }
       }
       else {
         for(i = 0; i < series.length; ++i){
           if(!series[i].label || series[i].hide) continue;
-          
+
           if(i % legend.noColumns === 0){
             fragments.push(rowStarted ? '</tr><tr>' : '<tr>');
             rowStarted = true;
@@ -5274,7 +5274,7 @@ Flotr.addPlugin('legend', {
 
           label = legend.labelFormatter(s.label);
           color = 'background-color:' + ((s.bars && s.bars.show && s.bars.fillColor && s.bars.fill) ? s.bars.fillColor : s.color) + ';';
-          
+
           fragments.push(
             '<td class="flotr-legend-color-box">',
               '<div style="border:1px solid ', legend.labelBoxBorderColor, ';padding:1px">',
@@ -5287,7 +5287,7 @@ Flotr.addPlugin('legend', {
           );
         }
         if(rowStarted) fragments.push('</tr>');
-          
+
         if(fragments.length > 0){
           var table = '<table style="font-size:smaller;color:' + options.grid.color + '">' + fragments.join('') + '</table>';
           if(legend.container){
@@ -5308,7 +5308,7 @@ Flotr.addPlugin('legend', {
             D.setStyles(div, styles);
             D.insert(div, table);
             D.insert(this.el, div);
-            
+
             if (!opacity) return;
 
             var c = legend.backgroundColor || options.grid.backgroundColor || '#ffffff';
@@ -5355,40 +5355,40 @@ Flotr.addPlugin('titles', {
         margin = options.grid.labelMargin,
         ctx = this.ctx,
         a = this.axes;
-    
+
     if (!options.HtmlText && this.textEnabled) {
       var style = {
         size: options.fontSize,
         color: options.grid.color,
         textAlign: 'center'
       };
-      
+
       // Add subtitle
       if (options.subtitle){
         Flotr.drawText(
           ctx, options.subtitle,
-          this.plotOffset.left + this.plotWidth/2, 
+          this.plotOffset.left + this.plotWidth/2,
           this.titleHeight + this.subtitleHeight - 2,
           style
         );
       }
-      
+
       style.weight = 1.5;
       style.size *= 1.5;
-      
+
       // Add title
       if (options.title){
         Flotr.drawText(
           ctx, options.title,
-          this.plotOffset.left + this.plotWidth/2, 
+          this.plotOffset.left + this.plotWidth/2,
           this.titleHeight - 2,
           style
         );
       }
-      
+
       style.weight = 1.8;
       style.size *= 0.8;
-      
+
       // Add x axis title
       if (a.x.options.title && a.x.used){
         style.textAlign = a.x.options.titleAlign || 'center';
@@ -5397,12 +5397,12 @@ Flotr.addPlugin('titles', {
         style = Flotr.getBestTextAlign(style.angle, style);
         Flotr.drawText(
           ctx, a.x.options.title,
-          this.plotOffset.left + this.plotWidth/2, 
+          this.plotOffset.left + this.plotWidth/2,
           this.plotOffset.top + a.x.maxLabel.height + this.plotHeight + 2 * margin,
           style
         );
       }
-      
+
       // Add x2 axis title
       if (a.x2.options.title && a.x2.used){
         style.textAlign = a.x2.options.titleAlign || 'center';
@@ -5411,12 +5411,12 @@ Flotr.addPlugin('titles', {
         style = Flotr.getBestTextAlign(style.angle, style);
         Flotr.drawText(
           ctx, a.x2.options.title,
-          this.plotOffset.left + this.plotWidth/2, 
+          this.plotOffset.left + this.plotWidth/2,
           this.plotOffset.top - a.x2.maxLabel.height - 2 * margin,
           style
         );
       }
-      
+
       // Add y axis title
       if (a.y.options.title && a.y.used){
         style.textAlign = a.y.options.titleAlign || 'right';
@@ -5425,12 +5425,12 @@ Flotr.addPlugin('titles', {
         style = Flotr.getBestTextAlign(style.angle, style);
         Flotr.drawText(
           ctx, a.y.options.title,
-          this.plotOffset.left - a.y.maxLabel.width - 2 * margin, 
+          this.plotOffset.left - a.y.maxLabel.width - 2 * margin,
           this.plotOffset.top + this.plotHeight / 2,
           style
         );
       }
-      
+
       // Add y2 axis title
       if (a.y2.options.title && a.y2.used){
         style.textAlign = a.y2.options.titleAlign || 'left';
@@ -5439,72 +5439,72 @@ Flotr.addPlugin('titles', {
         style = Flotr.getBestTextAlign(style.angle, style);
         Flotr.drawText(
           ctx, a.y2.options.title,
-          this.plotOffset.left + this.plotWidth + a.y2.maxLabel.width + 2 * margin, 
+          this.plotOffset.left + this.plotWidth + a.y2.maxLabel.width + 2 * margin,
           this.plotOffset.top + this.plotHeight / 2,
           style
         );
       }
-    } 
+    }
     else {
       html = [];
-      
+
       // Add title
       if (options.title)
         html.push(
-          '<div style="position:absolute;top:0;left:', 
+          '<div style="position:absolute;top:0;left:',
           this.plotOffset.left, 'px;font-size:1em;font-weight:bold;text-align:center;width:',
           this.plotWidth,'px;" class="flotr-title">', options.title, '</div>'
         );
-      
+
       // Add subtitle
       if (options.subtitle)
         html.push(
-          '<div style="position:absolute;top:', this.titleHeight, 'px;left:', 
+          '<div style="position:absolute;top:', this.titleHeight, 'px;left:',
           this.plotOffset.left, 'px;font-size:smaller;text-align:center;width:',
           this.plotWidth, 'px;" class="flotr-subtitle">', options.subtitle, '</div>'
         );
 
       html.push('</div>');
-      
+
       html.push('<div class="flotr-axis-title" style="font-weight:bold;">');
-      
+
       // Add x axis title
       if (a.x.options.title && a.x.used)
         html.push(
-          '<div style="position:absolute;top:', 
-          (this.plotOffset.top + this.plotHeight + options.grid.labelMargin + a.x.titleSize.height), 
-          'px;left:', this.plotOffset.left, 'px;width:', this.plotWidth, 
+          '<div style="position:absolute;top:',
+          (this.plotOffset.top + this.plotHeight + options.grid.labelMargin + a.x.titleSize.height),
+          'px;left:', this.plotOffset.left, 'px;width:', this.plotWidth,
           'px;text-align:', a.x.options.titleAlign, ';" class="flotr-axis-title flotr-axis-title-x1">', a.x.options.title, '</div>'
         );
-      
+
       // Add x2 axis title
       if (a.x2.options.title && a.x2.used)
         html.push(
-          '<div style="position:absolute;top:0;left:', this.plotOffset.left, 'px;width:', 
+          '<div style="position:absolute;top:0;left:', this.plotOffset.left, 'px;width:',
           this.plotWidth, 'px;text-align:', a.x2.options.titleAlign, ';" class="flotr-axis-title flotr-axis-title-x2">', a.x2.options.title, '</div>'
         );
-      
+
       // Add y axis title
       if (a.y.options.title && a.y.used)
         html.push(
-          '<div style="position:absolute;top:', 
-          (this.plotOffset.top + this.plotHeight/2 - a.y.titleSize.height/2), 
+          '<div style="position:absolute;top:',
+          (this.plotOffset.top + this.plotHeight/2 - a.y.titleSize.height/2),
           'px;left:0;text-align:', a.y.options.titleAlign, ';" class="flotr-axis-title flotr-axis-title-y1">', a.y.options.title, '</div>'
         );
-      
+
       // Add y2 axis title
       if (a.y2.options.title && a.y2.used)
         html.push(
-          '<div style="position:absolute;top:', 
-          (this.plotOffset.top + this.plotHeight/2 - a.y.titleSize.height/2), 
+          '<div style="position:absolute;top:',
+          (this.plotOffset.top + this.plotHeight/2 - a.y.titleSize.height/2),
           'px;right:0;text-align:', a.y2.options.titleAlign, ';" class="flotr-axis-title flotr-axis-title-y2">', a.y2.options.title, '</div>'
         );
-      
+
       html = html.join('');
 
       var div = D.create('div');
       D.setStyles({
-        color: options.grid.color 
+        color: options.grid.color
       });
       div.className = 'flotr-titles';
       D.insert(this.el, div);
@@ -5514,7 +5514,7 @@ Flotr.addPlugin('titles', {
 });
 })();
 
-/** 
+/**
  * Selection Handles Plugin
  *
  * Depends upon options.selection.mode
@@ -5747,7 +5747,7 @@ var envision = {
 };
 
 // Visualization Class
-(function () { 
+(function () {
 
 var
   CN_FIRST  = 'envision-first',
@@ -5970,7 +5970,7 @@ envision.Visualization = Visualization;
 })();
 
 // Component Class
-(function () { 
+(function () {
 
 var
 
@@ -5983,7 +5983,7 @@ var
 /**
  * @summary Defines a visualization component.
  *
- * @description Components are the building blocks of a visualization, 
+ * @description Components are the building blocks of a visualization,
  * representing one typically graphical piece of the vis.  This class manages
  * the options, DOM and API construction for an adapter which handles the
  * actual drawing of the visualization piece.
@@ -5996,7 +5996,7 @@ var
  * @param {Element} [element]  A container element for the component.
  * @param {Number} [height]  An explicit component height.
  * @param {Number} [width]  An explicit component width.
- * @param {Array} [data]  An array of data.  Data may be formatted for 
+ * @param {Array} [data]  An array of data.  Data may be formatted for
  * envision or for the adapter itself, in which case skipPreprocess will
  * also need to be submitted.
  * @param {Boolean} [skipPreprocess]  Skip data preprocessing.  This is useful
@@ -6229,12 +6229,12 @@ var H = envision;
  * are defined as configurable mappings of trigger events and event consumers.
  * It is up to the adapter to implement the triggers and consumers.
  *
- * A component may be both a leader and a follower.  A leader which is a 
+ * A component may be both a leader and a follower.  A leader which is a
  * follower will react to actions triggered by other leaders, but will safely
  * not react to its own.  This allows for groups of components to perform a
  * common action.
  *
- * Optionally, actions may be supplied with a callback executed before the 
+ * Optionally, actions may be supplied with a callback executed before the
  * action is consumed.  This allows for quick custom functionality to be added
  * and is how advanced data management (ie. live Ajax data) may be implemented.
  *
@@ -6366,7 +6366,7 @@ H.Interaction = Interaction;
  *
  * @description Data can be preprocessed before it is rendered by an adapter.
  *
- * This has several important performance considerations.  If data will be 
+ * This has several important performance considerations.  If data will be
  * rendered repeatedly or on slower browsers, it will be faster after being
  * optimized.
  *
@@ -6494,7 +6494,7 @@ Preprocessor.prototype = {
    * Subsample data using MinMax.
    *
    * MinMax will display the extrema of the subsample intervals.  This is
-   * slower than regular interval subsampling but necessary for data that 
+   * slower than regular interval subsampling but necessary for data that
    * is very non-homogenous.
    *
    * @param {Number} resolution
@@ -6703,7 +6703,7 @@ envision.Preprocessor = Preprocessor;
 }());
 
 /**
- * Actions namespace.  Actions are configurations for 
+ * Actions namespace.  Actions are configurations for
  * common use cases when building Interactions.
  */
 envision.actions = envision.actions || {};
@@ -6787,7 +6787,7 @@ envision.adapters.defaultOptions = {
 /**
  * Flotr Adapter
  */
-(function () { 
+(function () {
 
 var
   V = envision,
@@ -7188,11 +7188,11 @@ Flotr.addType('lite-lines', {
       context   = options.context,
       xScale    = options.xScale,
       yScale    = options.yScale,
-      data      = options.data, 
+      data      = options.data,
       length    = data.length - 1,
       zero      = yScale(0),
       x0, y0;
-      
+
     if (length < 1) return;
 
     x0 = xScale(data[0][0]);
@@ -7253,7 +7253,7 @@ Flotr.addType('whiskers', {
     centered: true         // => center the bars to their x axis value
   },
 
-  stack : { 
+  stack : {
     positive : [],
     negative : [],
     _positive : [], // Shadow
@@ -7270,7 +7270,7 @@ Flotr.addType('whiskers', {
     context.lineWidth = options.lineWidth;
     context.strokeStyle = options.color;
     if (options.fill) context.fillStyle = options.fillStyle;
-    
+
     this.plot(options);
 
     context.restore();
@@ -7450,7 +7450,7 @@ Flotr.addType('candles', {
           context.moveTo(x, Math.floor(bottom2 + lineWidth));
           context.lineTo(x, Math.floor(bottom + lineWidth));
         }
-        
+
         context.closePath();
         context.stroke();
       }
@@ -7660,7 +7660,7 @@ envision.components = envision.components || {};
  * Templates namespace.
  *
  * Templates are pre-built interactive visualizations fitting common
- * use-cases.  These include several components together with 
+ * use-cases.  These include several components together with
  * interactions and configuration for each.  They may have their own
  * custom configuration options as well.
  */
@@ -7701,9 +7701,9 @@ function getDefaults () {
           trackDecimals: 4,
           position: 'ne'
         },
-        yaxis : { 
+        yaxis : {
           autoscale : true,
-          autoscaleMargin : 0.05,
+          autoscaleMargin : 1,
           noTicks : 4,
           showLabels : true,
           min : 0
@@ -7725,7 +7725,7 @@ function getDefaults () {
         },
         yaxis : {
           autoscale : true,
-          autoscaleMargin : 0.5 
+          autoscaleMargin : 10
         }
       },
       processData : processData
@@ -7746,7 +7746,7 @@ function getDefaults () {
         },
         yaxis : {
           autoscale : true,
-          autoscaleMargin : 0.1
+          autoscaleMargin : 1
         },
         handles : {
           show : true
