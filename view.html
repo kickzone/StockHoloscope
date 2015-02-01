@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="jquery-2.1.1.js"></script>
+<script src="envision.js"></script>
+<script src="flotr2/candles.js"></script>
+<title>StockHoloscope</title>
+<style>
+#graph {
+	width: 800px;
+	height: 600px;
+}
+</style>
+<link type="text/css" href="css/flotr.css" rel="stylesheet">
+<link type="text/css" href="css/templates/finance.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="cpanel">
+		コード：<input type="text" id="meigara" value="1000"> <input
+			type="button" id="view" value="株価表示" />
+	</div>
+	<div id="mname"></div>
+	<div id="graph"></div>
+
+	<div id="history"></div>
+	<script>
+
+$("#view").click(View);
+
+function View () {
+
+	var meigara;
+	$.ajax({
+		async: false,
+		type: "POST",
+		url: "ajax_getmeigara.php",
+		data: { mcode : $("#meigara").val() }
+	}).done(function( msg ) {
+		meigara = eval("("+msg+")");
+	});
+	$("#mname").text(meigara.mname);
+	var container = $("#graph")[0];
+	var price = MeigaraToPrice(meigara),
+		volume = MeigaraToVolume(meigara),
+	    options = {
+	    container : container,
+	    data : {
+	      price : price,
+	      volume : volume,
+	      summary : price
+	    },
+	    trackFormatter : function (o) {
+
+	      var
+	        data = o.series.data,
+	        index = data[o.index][0],
+	        value;
+
+	      value = meigara.hiashi[index].ymd + ': \\' + meigara.hiashi[index].close + ", Vol: " + meigara.hiashi[index].volume;
+
+	      return value;
+	    },
+	    xTickFormatter : function (index) {
+	      var date = new Date(meigara.hiashi[index].ymd);
+	      return date.getFullYear() + '';
+	    },
+	    // An initial selection
+	    selection : {
+	      data : {
+	        x : {
+	          min : 100,
+	          max : 200
+	        }
+	      }
+	    }
+	  };
+
+	  return new envision.templates.Finance(options);
+}
+
+function MeigaraToPrice(meigara){
+	var price = [];
+	var seq = [];
+	var body = [];
+	for(var i=0; i<meigara.hiashi.length; i++){
+		seq.push(i);
+		body.push(meigara.hiashi[i].close);
+	}
+	price.push(seq);
+	price.push(body);
+	return price;
+}
+
+function MeigaraToVolume(meigara){
+	var volume = [];
+	var seq = [];
+	var body = [];
+	for(var i=0; i<meigara.hiashi.length; i++){
+		seq.push(i);
+		body.push(meigara.hiashi[i].volume);
+	}
+	volume.push(seq);
+	volume.push(body);
+	return volume;
+}
+</script>
+
+</body>
+</html>
